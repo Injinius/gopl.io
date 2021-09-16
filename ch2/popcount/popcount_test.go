@@ -22,6 +22,7 @@ func BitCount(x uint64) int {
 	return int(x & 0x7f)
 }
 
+//Ex2.5
 func PopCountByClearing(x uint64) int {
 	n := 0
 	for x != 0 {
@@ -31,6 +32,7 @@ func PopCountByClearing(x uint64) int {
 	return n
 }
 
+// Ex2.4
 func PopCountByShifting(x uint64) int {
 	n := 0
 	for i := uint(0); i < 64; i++ {
