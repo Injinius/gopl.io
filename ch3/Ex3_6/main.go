@@ -8,7 +8,7 @@
 package main
 
 import (
-	//"fmt"
+	// "fmt"
 	"image"
 	"image/color"
 	"image/png"
@@ -46,6 +46,8 @@ func main() {
 	// Compute pixel from avg of desired pixel with right, top, and upper right neighbors
 	for py := 0; py < height-1; py++ {
 		for px := 0; px < width-1; px++ {
+			// fmt.Printf("px=%d, py=%d\n", px, py)
+
 			r1, g1, b1, a1 := colors[px][py].RGBA()
 			// fmt.Printf("r1=%d, g1=%d, b1=%d, a1=%d\n", r1, g1, b1, a1)
 			r2, g2, b2, a2 := colors[px+1][py].RGBA()
