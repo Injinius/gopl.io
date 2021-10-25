@@ -32,6 +32,7 @@ func appendslice(x []int, y ...int) []int {
 func appendInt(x []int, y int) []int {
 	var z []int
 	zlen := len(x) + 1
+	//fmt.Printf("x.len=%d, x.cap=%d, zlen=%d\n", len(x), cap(x), zlen)
 	if zlen <= cap(x) {
 		// There is room to grow.  Extend the slice.
 		z = x[:zlen]
@@ -39,8 +40,10 @@ func appendInt(x []int, y int) []int {
 		// There is insufficient space.  Allocate a new array.
 		// Grow by doubling, for amortized linear complexity.
 		zcap := zlen
-		if zcap < 2*len(x) {
+		//fmt.Printf("zcap=%d, len*2=%d\n", zcap, len(x)*2)
+		if zcap < 2*len(x) { //Note: When len=0,1 -- there's no bump
 			zcap = 2 * len(x)
+			//fmt.Printf("bumped zcap=%d\n", zcap)
 		}
 		z = make([]int, zlen, zcap)
 		copy(z, x) // a built-in function; see text
@@ -59,6 +62,11 @@ func main() {
 		fmt.Printf("%d  cap=%d\t%v\n", i, cap(y), y)
 		x = y
 	}
+	x = appendslice(x, x...)
+	fmt.Printf("appendslice: cap=%d\t%v\n", cap(x), x)
+	x = appendslice(x, 100, 101, 102)
+	fmt.Printf("appendslice: cap=%d\t%v\n", cap(x), x)
+
 }
 
 //!-growth
